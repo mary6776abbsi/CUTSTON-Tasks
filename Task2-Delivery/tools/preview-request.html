@@ -1,0 +1,1411 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17191C">
+<title>ثبت درخواست خرید | CUTSTON</title>
+
+<style>
+:root {
+  --orange:#E87524;
+  --orange-dark:#C65D16;
+  --black:#17191C;
+  --gray:#747980;
+  --border:#E8E9EB;
+  --bg:#F4F5F7;
+  --white:#fff;
+  --green:#18834D;
+  --red:#C0392B;
+  --radius:13px;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--black);
+  line-height:1.85;
+}
+
+button,input,select,textarea { font:inherit; }
+
+.header {
+  background:var(--black);
+  color:white;
+  padding:17px 24px;
+}
+
+.header-inner {
+  max-width:1180px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.brand {
+  direction:ltr;
+  font-size:27px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.brand span { color:var(--orange); }
+
+.header-caption {
+  color:#BFC2C6;
+  font-size:12px;
+}
+
+.header-line {
+  height:3px;
+  background:var(--orange);
+}
+
+.container {
+  width:min(1180px,calc(100% - 36px));
+  margin:38px auto 60px;
+}
+
+.page-heading { margin-bottom:25px; }
+
+.eyebrow {
+  color:var(--orange-dark);
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:.5px;
+}
+
+.page-heading h1 {
+  margin:5px 0;
+  font-size:27px;
+}
+
+.page-heading p {
+  margin:0;
+  color:var(--gray);
+  font-size:13px;
+}
+
+.main-layout {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 290px;
+  gap:22px;
+  align-items:start;
+}
+
+.card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:25px;
+  margin-bottom:21px;
+  box-shadow:0 5px 22px rgba(0,0,0,.035);
+}
+
+.section-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid var(--border);
+  padding-bottom:14px;
+  margin-bottom:21px;
+}
+
+.section-title-wrap {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.section-mark {
+  width:4px;
+  height:23px;
+  background:var(--orange);
+  border-radius:5px;
+}
+
+.section-heading h2 {
+  font-size:16px;
+  margin:0;
+}
+
+.section-heading p {
+  font-size:10px;
+  color:var(--gray);
+  margin:0;
+}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:17px;
+}
+
+.field { min-width:0; }
+.field.full { grid-column:1/-1; }
+
+label {
+  display:block;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+
+.required { color:var(--orange-dark); }
+
+input,select,textarea {
+  width:100%;
+  border:1px solid #DDE0E4;
+  border-radius:8px;
+  background:white;
+  color:var(--black);
+  padding:11px 12px;
+  outline:none;
+  font-size:13px;
+  transition:.2s;
+}
+
+input,select { height:47px; }
+
+input:focus,select:focus,textarea:focus {
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px rgba(232,117,36,.1);
+}
+
+input::placeholder,textarea::placeholder { color:#A5A8AD; }
+
+select { cursor:pointer; }
+select:disabled { background:#F1F2F3; cursor:not-allowed; }
+/* Searchable city dropdown */
+.city-picker {
+  position: relative;
+  width: 100%;
+}
+
+.city-picker-button {
+  width: 100%;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 12px;
+  border: 1px solid #DDE0E4;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--black);
+  font-size: 13px;
+  text-align: right;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.city-picker-button:hover,
+.city-picker-button[aria-expanded="true"] {
+  border-color: var(--orange);
+}
+
+.city-picker-button:focus-visible {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,117,36,.1);
+}
+
+.city-picker-arrow {
+  color: #858A91;
+  font-size: 17px;
+}
+
+.city-dropdown {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 7px);
+  right: 0;
+  left: 0;
+  padding: 9px;
+  background: #fff;
+  border: 1px solid #E1E3E6;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.13);
+}
+
+.city-dropdown[hidden] {
+  display: none;
+}
+
+.city-search-wrap {
+  position: sticky;
+  top: 0;
+  padding-bottom: 8px;
+  background: #fff;
+}
+
+.city-search {
+  height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #E1E3E6;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.city-options {
+  max-height: 220px;
+  overflow-y: auto;
+  display: grid;
+  gap: 3px;
+}
+
+.city-option {
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  padding: 9px 10px;
+  background: #fff;
+  color: #34383E;
+  text-align: right;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.city-option:hover,
+.city-option:focus-visible {
+  outline: none;
+  background: #FFF3E9;
+  color: var(--orange-dark);
+}
+
+.city-option[aria-selected="true"] {
+  background: #FFF0E5;
+  color: var(--orange-dark);
+  font-weight: bold;
+}
+
+.city-empty {
+  padding: 12px 8px;
+  color: #92969B;
+  text-align: center;
+  font-size: 11px;
+}
+textarea { min-height:100px; resize:vertical; }
+
+.error {
+  color:var(--red);
+  font-size:11px;
+  min-height:18px;
+  margin-top:4px;
+}
+
+.form-divider {
+  height:1px;
+  background:var(--border);
+  margin:26px 0;
+}
+
+.price-panel {
+  background:#FFF6EF;
+  border:1px solid #F2D7C3;
+  border-radius:11px;
+  padding:17px 19px;
+  margin-top:23px;
+}
+
+.price-panel-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.price-label {
+  font-size:12px;
+  font-weight:bold;
+  color:#694A34;
+}
+
+.price-description {
+  font-size:10px;
+  color:#98765D;
+  margin-top:4px;
+}
+
+.price-value {
+  font-size:20px;
+  font-weight:900;
+  color:var(--orange-dark);
+  text-align:left;
+}
+
+.submit-area {
+  display:flex;
+  justify-content:flex-start;
+  margin-top:22px;
+}
+
+.submit-button {
+  min-width:190px;
+  border:0;
+  border-radius:8px;
+  padding:12px 24px;
+  background:var(--orange);
+  color:white;
+  font-weight:bold;
+  font-size:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.submit-button:hover { background:var(--orange-dark); }
+.submit-button:disabled { opacity:.6; cursor:not-allowed; }
+
+.status {
+  display:none;
+  padding:12px;
+  border-radius:8px;
+  margin-top:15px;
+  font-size:12px;
+}
+
+.status.success {
+  display:block;
+  color:#12683A;
+  background:#EAF7EF;
+  border:1px solid #B9E4C9;
+}
+
+.status.failure {
+  display:block;
+  color:#A52A20;
+  background:#FFF0EE;
+  border:1px solid #F1C3BE;
+}
+
+.side-card { position:sticky; top:18px; }
+
+.side-card h3 {
+  font-size:14px;
+  margin:0 0 17px;
+}
+
+.side-item {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.side-icon {
+  flex:0 0 34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  background:#FFF1E6;
+  color:var(--orange-dark);
+  border-radius:9px;
+  font-size:15px;
+}
+
+.side-item strong {
+  display:block;
+  font-size:11px;
+}
+
+.side-item p {
+  color:var(--gray);
+  font-size:10px;
+  margin:2px 0 0;
+}
+
+.side-notice {
+  padding:12px;
+  border-radius:8px;
+  background:#F3F4F5;
+  color:#656A70;
+  font-size:10px;
+  margin-top:19px;
+}
+
+.success-card {
+  display:none;
+  background:#EFF9F3;
+  border:1px solid #B9E4C9;
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.success-card h3 {
+  color:var(--green);
+  font-size:16px;
+  margin:0 0 6px;
+}
+
+.tracking-row {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+
+.tracking-code {
+  direction:ltr;
+  background:white;
+  border:1px dashed var(--green);
+  border-radius:7px;
+  padding:5px 12px;
+  font-weight:bold;
+  font-size:12px;
+}
+
+.copy-button {
+  border:1px solid #B9DCC6;
+  background:white;
+  color:var(--green);
+  border-radius:7px;
+  padding:6px 11px;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.success-card p {
+  font-size:11px;
+  color:#47745A;
+  margin:8px 0 0;
+}
+
+.history-card { margin-top:22px; }
+
+.history-heading-note {
+  font-size:10px;
+  color:var(--gray);
+}
+
+/* History cards */
+.history-list {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:13px;
+}
+
+.history-item {
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:white;
+  overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+
+.history-item:hover {
+  border-color:#E9B58F;
+  box-shadow:0 5px 17px rgba(0,0,0,.035);
+}
+
+.history-item-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 17px;
+  background:#FAFAFB;
+  border-bottom:1px solid var(--border);
+}
+
+.history-company {
+  font-size:13px;
+  font-weight:bold;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+
+.history-status {
+  flex-shrink:0;
+  background:#FFF3E8;
+  color:#B65C1B;
+  border-radius:20px;
+  padding:3px 10px;
+  font-size:10px;
+}
+
+.history-item-body { padding:15px 17px; }
+
+.history-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:13px;
+}
+
+.history-data { min-width:0; }
+
+.history-data-label {
+  color:#92969B;
+  font-size:10px;
+  margin-bottom:3px;
+}
+
+.history-data-value {
+  color:#30343A;
+  font-size:12px;
+  font-weight:bold;
+  overflow-wrap:anywhere;
+}
+
+.history-item-foot {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:11px 17px;
+  border-top:1px solid var(--border);
+  background:#FCFCFC;
+}
+
+.history-code-wrap {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.history-code {
+  direction:ltr;
+  color:var(--orange-dark);
+  font-size:11px;
+  font-weight:bold;
+}
+
+.history-date {
+  font-size:10px;
+  color:var(--gray);
+}
+
+.history-copy {
+  border:1px solid #E9D4C5;
+  background:white;
+  color:var(--orange-dark);
+  border-radius:6px;
+  padding:4px 9px;
+  font-size:10px;
+  cursor:pointer;
+}
+
+.empty-history {
+  padding:35px 15px;
+  text-align:center;
+  border:1px dashed #D9DCE0;
+  border-radius:11px;
+  background:#FAFAFB;
+}
+
+.empty-history-icon {
+  font-size:26px;
+  color:#C2C5CA;
+  margin-bottom:5px;
+}
+
+.empty-history strong {
+  display:block;
+  font-size:13px;
+  color:#555B62;
+}
+
+.empty-history p {
+  margin:4px 0 0;
+  color:#999DA3;
+  font-size:11px;
+}
+
+.footer {
+  background:var(--black);
+  color:#AEB2B7;
+  text-align:center;
+  padding:17px;
+  font-size:10px;
+}
+
+@media(max-width:900px) {
+  .main-layout { grid-template-columns:1fr; }
+  .side-card { position:static; }
+  .side-card-content {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+  }
+  .side-item { margin:0; }
+  .side-notice { grid-column:1/-1; }
+}
+
+@media(max-width:620px) {
+  .header { padding:14px 17px; }
+  .header-inner {
+    align-items:flex-start;
+    flex-direction:column;
+    gap:2px;
+  }
+  .brand { font-size:23px; }
+  .container {
+    width:calc(100% - 22px);
+    margin:24px auto 38px;
+  }
+  .page-heading h1 { font-size:22px; }
+  .page-heading p { font-size:11px; }
+  .card { padding:16px; }
+  .form-grid { grid-template-columns:1fr; gap:12px; }
+  .field.full { grid-column:auto; }
+  .section-heading {
+    align-items:flex-start;
+    flex-direction:column;
+    gap:4px;
+  }
+  .section-heading p { padding-right:14px; }
+  .price-panel { padding:14px; }
+  .price-value { font-size:16px; }
+  .submit-button { width:100%; }
+  .history-item-head {
+    align-items:flex-start;
+    flex-direction:column;
+    gap:5px;
+    padding:12px;
+  }
+  .history-item-body { padding:13px 12px; }
+  .history-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px 9px;
+  }
+  .history-item-foot {
+    align-items:flex-start;
+    flex-direction:column;
+    padding:11px 12px;
+  }
+  .history-code-wrap { width:100%; }
+  .side-card-content { grid-template-columns:1fr; }
+  .side-notice { grid-column:auto; }
+  .success-card { padding:15px; }
+}
+
+@media(max-width:360px) {
+  .history-grid { grid-template-columns:1fr 1fr; }
+  .history-data-value { font-size:11px; }
+  .tracking-code { font-size:10px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">CUT<span>STON</span></div>
+    <div class="header-caption">سامانه ثبت درخواست خرید محصولات</div>
+  </div>
+</header>
+<div class="header-line"></div>
+
+<main class="container">
+
+  <div class="page-heading">
+    <div class="eyebrow">CUTSTON / PURCHASE REQUEST</div>
+    <h1>ثبت درخواست خرید</h1>
+    <p>برای دریافت پیش‌فاکتور و بررسی سفارش، اطلاعات زیر را تکمیل کنید.</p>
+  </div>
+
+  <div id="successCard" class="success-card">
+    <h3>درخواست شما با موفقیت ثبت شد</h3>
+    <div>کد پیگیری درخواست:</div>
+    <div class="tracking-row">
+      <span id="trackingCode" class="tracking-code"></span>
+      <button type="button" id="copySuccessCode" class="copy-button">کپی کد پیگیری</button>
+    </div>
+    <div id="successDate" class="history-date"></div>
+    <p>درخواست شما برای بررسی به واحد فروش ارسال شده است. ثبت این درخواست به معنی نهایی شدن خرید نیست.</p>
+  </div>
+
+  <div class="main-layout">
+
+    <form id="purchaseForm" class="card" novalidate>
+
+      <div class="section-heading">
+        <div class="section-title-wrap">
+          <div class="section-mark"></div>
+          <h2>اطلاعات شرکت و تماس</h2>
+        </div>
+        <p>موارد دارای * الزامی هستند</p>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="companyName">نام شرکت <span class="required">*</span></label>
+          <input id="companyName" name="companyName" placeholder="نام شرکت را وارد کنید">
+          <div class="error" data-error="companyName"></div>
+        </div>
+
+        <div class="field">
+          <label for="mobile">شماره موبایل <span class="required">*</span></label>
+          <input id="mobile" name="mobile" type="tel" inputmode="tel" placeholder="09123456789">
+          <div class="error" data-error="mobile"></div>
+        </div>
+
+        <div class="field">
+  <label for="cityPickerButton">
+    شهر <span class="required">*</span>
+  </label>
+
+  <input type="hidden" id="city" name="city">
+
+  <div class="city-picker" id="cityPicker">
+
+    <button
+      type="button"
+      class="city-picker-button"
+      id="cityPickerButton"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-controls="cityDropdown"
+    >
+      <span id="citySelectedText">انتخاب شهر</span>
+      <span class="city-picker-arrow">⌄</span>
+    </button>
+
+    <div class="city-dropdown" id="cityDropdown" hidden>
+
+      <div class="city-search-wrap">
+        <input
+          type="search"
+          id="citySearch"
+          class="city-search"
+          placeholder="جست‌وجوی شهر..."
+          autocomplete="off"
+          aria-label="جست‌وجوی شهر"
+        >
+      </div>
+
+      <div
+        class="city-options"
+        id="cityOptions"
+        role="listbox"
+        aria-label="فهرست شهرها"
+      ></div>
+
+    </div>
+  </div>
+
+  <div class="error" data-error="city"></div>
+</div>
+
+        <div class="field">
+          <label for="personName">نام شخص رابط</label>
+          <input id="personName" name="personName" placeholder="اختیاری">
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <div class="section-heading">
+        <div class="section-title-wrap">
+          <div class="section-mark"></div>
+          <h2>مشخصات محصول و سفارش</h2>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="product">انتخاب محصول <span class="required">*</span></label>
+          <select id="product" name="productId">
+            <option value="">محصول موردنظر را انتخاب کنید</option>
+          </select>
+          <div class="error" data-error="productId"></div>
+        </div>
+
+        <div class="field">
+          <label for="size">سایز محصول <span class="required">*</span></label>
+          <select id="size" name="sizeId" disabled>
+            <option value="">ابتدا محصول را انتخاب کنید</option>
+          </select>
+          <div class="error" data-error="sizeId"></div>
+        </div>
+
+        <div class="field">
+          <label for="quantity">تعداد موردنیاز <span class="required">*</span></label>
+          <input id="quantity" name="quantity" inputmode="numeric" placeholder="تعداد را وارد کنید">
+          <div class="error" data-error="quantity"></div>
+        </div>
+
+        <div class="field full">
+          <label for="description">توضیحات تکمیلی</label>
+          <textarea id="description" name="description" placeholder="توضیحات یا درخواست‌های خود را وارد کنید..."></textarea>
+        </div>
+      </div>
+
+      <div class="price-panel">
+        <div class="price-panel-top">
+          <div>
+            <div class="price-label">مبلغ اولیه درخواست</div>
+            <div class="price-description" id="amountNote">پس از انتخاب محصول، سایز و تعداد نمایش داده می‌شود.</div>
+          </div>
+          <div id="amountValue" class="price-value">—</div>
+        </div>
+      </div>
+
+      <div id="formStatus" class="status"></div>
+
+      <div class="submit-area">
+        <button id="submitButton" class="submit-button" type="submit">ثبت درخواست خرید</button>
+      </div>
+
+    </form>
+
+    <aside>
+      <div class="card side-card">
+        <h3>راهنمای ثبت درخواست</h3>
+        <div class="side-card-content">
+          <div class="side-item">
+            <div class="side-icon">▤</div>
+            <div>
+              <strong>تکمیل اطلاعات</strong>
+              <p>اطلاعات شرکت و شماره تماس معتبر خود را وارد کنید.</p>
+            </div>
+          </div>
+
+          <div class="side-item">
+            <div class="side-icon">◇</div>
+            <div>
+              <strong>انتخاب محصول</strong>
+              <p>محصول، سایز و تعداد موردنیاز را مشخص کنید.</p>
+            </div>
+          </div>
+
+          <div class="side-item">
+            <div class="side-icon">✓</div>
+            <div>
+              <strong>دریافت کد پیگیری</strong>
+              <p>پس از ثبت درخواست، کد پیگیری اختصاصی دریافت می‌کنید.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-notice">
+          مبلغ نمایش‌داده‌شده برآورد اولیه است. قیمت و شرایط نهایی پس از بررسی واحد فروش اعلام می‌شود.
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <section class="card history-card">
+    <div class="section-heading">
+      <div class="section-title-wrap">
+        <div class="section-mark"></div>
+        <h2>درخواست‌های ثبت‌شده</h2>
+      </div>
+      <div class="history-heading-note">سوابق ذخیره‌شده در این مرورگر</div>
+    </div>
+
+    <div id="historyList" class="history-list">
+      <div class="empty-history">
+        <div class="empty-history-icon">▤</div>
+        <strong>هنوز درخواستی ثبت نشده است</strong>
+        <p>پس از ثبت درخواست خرید، سوابق آن در این بخش نمایش داده می‌شود.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  CUTSTON — سامانه ثبت درخواست خرید محصولات
+</footer>
+
+<script type="module">
+import {
+  getProducts,
+  getProductSizes,
+  normalizeDigits,
+  validateRequest,
+  calculateAmount
+} from '../src/request-form.js';
+
+import {
+  saveRequest,
+  getRequests
+} from '../src/request-storage.js';
+
+const form = document.getElementById('purchaseForm');
+const productSelect = document.getElementById('product');
+const sizeSelect = document.getElementById('size');
+const quantityInput = document.getElementById('quantity');
+const submitButton = document.getElementById('submitButton');
+const amountValue = document.getElementById('amountValue');
+const amountNote = document.getElementById('amountNote');
+const formStatus = document.getElementById('formStatus');
+const historyList = document.getElementById('historyList');
+const successCard = document.getElementById('successCard');
+
+let isSubmitting = false;
+let lastSubmissionKey = '';
+let lastSubmissionTime = 0;
+
+const products = getProducts();
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  })[char]);
+}
+/* Searchable city picker */
+
+const cityPicker = document.getElementById('cityPicker');
+const cityPickerButton = document.getElementById('cityPickerButton');
+const cityDropdown = document.getElementById('cityDropdown');
+const citySearch = document.getElementById('citySearch');
+const cityOptions = document.getElementById('cityOptions');
+const cityInput = document.getElementById('city');
+const citySelectedText = document.getElementById('citySelectedText');
+
+const iranCities = [
+  'تهران','مشهد','اصفهان','شیراز','تبریز','کرج','اهواز','قم',
+  'رشت','کرمانشاه','ارومیه','یزد','کرمان','همدان','اردبیل',
+  'بندرعباس','زاهدان','سنندج','قزوین','گرگان','ساری','بوشهر',
+  'خرم‌آباد','اراک','ایلام','شهرکرد','بیرجند','بجنورد','یاسوج',
+  'زنجان','کاشان','نجف‌آباد','آبادان','دزفول','مراغه',
+  'قائم‌شهر','نیشابور','سبزوار','رفسنجان','مرودشت','لار','کیش','قشم'
+];
+
+function openCityDropdown() {
+  cityDropdown.hidden = false;
+
+  cityPickerButton.setAttribute('aria-expanded', 'true');
+
+  citySearch.value = '';
+  renderCityOptions('');
+
+  requestAnimationFrame(() => citySearch.focus());
+}
+
+function closeCityDropdown() {
+  cityDropdown.hidden = true;
+
+  cityPickerButton.setAttribute('aria-expanded', 'false');
+}
+
+function renderCityOptions(searchTerm) {
+  const term = searchTerm.trim().toLocaleLowerCase('fa');
+
+  const filteredCities = iranCities.filter(city =>
+    city.toLocaleLowerCase('fa').includes(term)
+  );
+
+  if (!filteredCities.length) {
+    cityOptions.innerHTML =
+      '<div class="city-empty">شهری با این نام پیدا نشد.</div>';
+
+    return;
+  }
+
+  cityOptions.innerHTML = filteredCities.map(city => `
+    <button
+      type="button"
+      class="city-option"
+      role="option"
+      aria-selected="${city === cityInput.value}"
+      data-city="${escapeHTML(city)}"
+    >${escapeHTML(city)}</button>
+  `).join('');
+}
+
+cityPickerButton.addEventListener('click', () => {
+  if (cityDropdown.hidden) {
+    openCityDropdown();
+  } else {
+    closeCityDropdown();
+  }
+});
+
+citySearch.addEventListener('input', () => {
+  renderCityOptions(citySearch.value);
+});
+
+cityOptions.addEventListener('click', event => {
+  const option = event.target.closest('[data-city]');
+
+  if (!option) return;
+
+  cityInput.value = option.dataset.city;
+
+  citySelectedText.textContent = option.dataset.city;
+
+  cityPickerButton.classList.add('has-value');
+
+  showError('city', '');
+
+  closeCityDropdown();
+});
+
+citySearch.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeCityDropdown();
+    cityPickerButton.focus();
+  }
+});
+
+document.addEventListener('click', event => {
+  if (!cityPicker.contains(event.target)) {
+    closeCityDropdown();
+  }
+});
+function formatNumber(value) {
+  return Number(value).toLocaleString('fa-IR');
+}
+
+function formatDate(value) {
+  return new Date(value).toLocaleString('fa-IR');
+}
+
+function getSelectedProduct() {
+  return products.find(item => item.id === productSelect.value);
+}
+
+function getSelectedSize() {
+  const product = getSelectedProduct();
+  return product?.sizes.find(item => item.id === sizeSelect.value);
+}
+
+function showError(field,message) {
+  const element = document.querySelector(`[data-error="${field}"]`);
+  if (element) element.textContent = message || '';
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error').forEach(item => item.textContent = '');
+}
+
+function showStatus(message,type) {
+  formStatus.textContent = message;
+  formStatus.className = `status ${type}`;
+}
+
+function populateProducts() {
+  products.forEach(product => {
+    const option = document.createElement('option');
+    option.value = product.id;
+    option.textContent = `${product.name} (${product.code})`;
+    productSelect.appendChild(option);
+  });
+}
+
+function populateSizes() {
+  const sizes = getProductSizes(productSelect.value);
+
+  sizeSelect.innerHTML = '<option value="">انتخاب سایز</option>';
+  sizeSelect.disabled = sizes.length === 0;
+
+  if (!sizes.length) {
+    sizeSelect.innerHTML =
+      '<option value="">برای این محصول سایزی ثبت نشده است</option>';
+  }
+
+  sizes.forEach(size => {
+    const option = document.createElement('option');
+    option.value = size.id;
+    option.textContent = size.label;
+    sizeSelect.appendChild(option);
+  });
+
+  updateAmount();
+}
+
+function updateAmount() {
+  const size = getSelectedSize();
+  const quantity = normalizeDigits(quantityInput.value.trim());
+
+  if (!size || !quantity) {
+    amountValue.textContent = '—';
+    amountNote.textContent =
+      'پس از انتخاب محصول، سایز و تعداد نمایش داده می‌شود.';
+    return;
+  }
+
+  if (size.price === null || size.price === undefined) {
+    amountValue.textContent = 'نیازمند استعلام';
+    amountNote.textContent =
+      'قیمت این سایز باید از واحد فروش استعلام شود.';
+    return;
+  }
+
+  const amount = calculateAmount(size.price,quantity);
+
+  if (amount === null) {
+    amountValue.textContent = '—';
+    amountNote.textContent = 'لطفاً تعداد معتبر وارد کنید.';
+    return;
+  }
+
+  amountValue.textContent = `${formatNumber(amount)} ریال`;
+  amountNote.textContent =
+    `قیمت واحد: ${formatNumber(size.price)} ریال`;
+}
+
+function readForm() {
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  data.companyName = data.companyName.trim();
+  data.mobile = data.mobile.trim();
+  data.city = data.city.trim();
+  data.personName = data.personName.trim();
+  data.description = data.description.trim();
+  data.quantity = normalizeDigits(data.quantity.trim());
+
+  return data;
+}
+
+function validateForm(data) {
+  clearErrors();
+
+  const errors = validateRequest(data);
+
+  Object.entries(errors).forEach(([field,message]) => {
+    showError(field,message);
+  });
+
+  return Object.keys(errors).length === 0;
+}
+
+async function copyText(value,button) {
+  try {
+    await navigator.clipboard.writeText(value);
+    const oldText = button.textContent;
+    button.textContent = 'کپی شد';
+    setTimeout(() => button.textContent = oldText,1500);
+  } catch {
+    button.textContent = 'کپی نشد';
+  }
+}
+
+function renderHistory() {
+  const requests = getRequests().slice().reverse();
+
+  if (!requests.length) {
+    historyList.innerHTML = `
+      <div class="empty-history">
+        <div class="empty-history-icon">▤</div>
+        <strong>هنوز درخواستی ثبت نشده است</strong>
+        <p>پس از ثبت درخواست خرید، سوابق آن در این بخش نمایش داده می‌شود.</p>
+      </div>
+    `;
+    return;
+  }
+
+  historyList.innerHTML = requests.map(request => `
+    <article class="history-item">
+      <div class="history-item-head">
+        <div class="history-company">${escapeHTML(request.companyName)}</div>
+        <span class="history-status">در انتظار بررسی فروش</span>
+      </div>
+
+      <div class="history-item-body">
+        <div class="history-grid">
+          <div class="history-data">
+            <div class="history-data-label">شهر</div>
+            <div class="history-data-value">${escapeHTML(request.city)}</div>
+          </div>
+
+          <div class="history-data">
+            <div class="history-data-label">محصول</div>
+            <div class="history-data-value">${escapeHTML(request.productName)}</div>
+          </div>
+
+          <div class="history-data">
+            <div class="history-data-label">سایز</div>
+            <div class="history-data-value">${escapeHTML(request.sizeLabel)}</div>
+          </div>
+
+          <div class="history-data">
+            <div class="history-data-label">تعداد</div>
+            <div class="history-data-value">${escapeHTML(request.quantity)}</div>
+          </div>
+
+          <div class="history-data">
+            <div class="history-data-label">قیمت واحد ثبت‌شده</div>
+            <div class="history-data-value">${
+              request.unitPrice === null
+                ? 'نیازمند استعلام'
+                : `${formatNumber(request.unitPrice)} ریال`
+            }</div>
+          </div>
+
+          <div class="history-data">
+            <div class="history-data-label">مبلغ اولیه</div>
+            <div class="history-data-value">${
+              request.totalAmount === null
+                ? 'نیازمند استعلام'
+                : `${formatNumber(request.totalAmount)} ریال`
+            }</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-item-foot">
+        <div class="history-code-wrap">
+          <span class="history-code">${escapeHTML(request.trackingNumber)}</span>
+          <button type="button" class="history-copy" data-copy="${escapeHTML(request.trackingNumber)}">کپی کد</button>
+        </div>
+        <div class="history-date">تاریخ ثبت: ${escapeHTML(formatDate(request.createdAt))}</div>
+      </div>
+    </article>
+  `).join('');
+}
+
+productSelect.addEventListener('change',() => {
+  showError('productId','');
+  showError('sizeId','');
+  populateSizes();
+});
+
+sizeSelect.addEventListener('change',() => {
+  showError('sizeId','');
+  updateAmount();
+});
+
+quantityInput.addEventListener('input',() => {
+  quantityInput.value = normalizeDigits(quantityInput.value);
+  showError('quantity','');
+  updateAmount();
+});
+
+form.addEventListener('input',event => {
+  if (event.target.name) showError(event.target.name,'');
+});
+
+historyList.addEventListener('click',event => {
+  const button = event.target.closest('[data-copy]');
+  if (button) copyText(button.dataset.copy,button);
+});
+
+document.getElementById('copySuccessCode').addEventListener('click',event => {
+  const code = document.getElementById('trackingCode').textContent;
+  copyText(code,event.currentTarget);
+});
+
+form.addEventListener('submit',event => {
+  event.preventDefault();
+
+  if (isSubmitting) return;
+
+  const data = readForm();
+
+  if (!validateForm(data)) {
+    showStatus('لطفاً اطلاعات مشخص‌شده را اصلاح کنید.','failure');
+    return;
+  }
+
+  const product = getSelectedProduct();
+  const size = getSelectedSize();
+
+  if (!product || !size) {
+    showError('sizeId','لطفاً سایز معتبر انتخاب کنید.');
+    return;
+  }
+
+  const submissionKey = JSON.stringify(data);
+  const now = Date.now();
+
+  if (submissionKey === lastSubmissionKey && now - lastSubmissionTime < 1500) {
+    return;
+  }
+
+  isSubmitting = true;
+  lastSubmissionKey = submissionKey;
+  lastSubmissionTime = now;
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'در حال ثبت درخواست...';
+  formStatus.className = 'status';
+
+  try {
+    const unitPrice = size.price ?? null;
+
+    const request = {
+      companyName:data.companyName,
+      mobile:data.mobile,
+      city:data.city,
+      personName:data.personName,
+      description:data.description,
+      productId:product.id,
+      productName:product.name,
+      productCode:product.code,
+      sizeId:size.id,
+      sizeLabel:size.label,
+      dimensions:size.dimensions ?? null,
+      quantity:Number(data.quantity),
+      unitPrice,
+      currency:size.currency || 'IRR',
+      totalAmount:unitPrice === null
+        ? null
+        : unitPrice * Number(data.quantity)
+    };
+
+    const saved = saveRequest(request);
+
+    document.getElementById('trackingCode').textContent =
+      saved.trackingNumber;
+
+    document.getElementById('successDate').textContent =
+      `تاریخ ثبت: ${formatDate(saved.createdAt)}`;
+
+    successCard.style.display = 'block';
+
+    showStatus(
+      'درخواست با موفقیت ثبت شد و برای بررسی به واحد فروش ارسال شده است.',
+      'success'
+    );
+
+    renderHistory();
+    form.reset();
+cityInput.value = '';
+
+citySelectedText.textContent = 'انتخاب شهر';
+
+cityPickerButton.classList.remove('has-value');
+
+closeCityDropdown();
+    sizeSelect.innerHTML =
+      '<option value="">ابتدا محصول را انتخاب کنید</option>';
+
+    sizeSelect.disabled = true;
+    amountValue.textContent = '—';
+    amountNote.textContent =
+      'پس از انتخاب محصول، سایز و تعداد نمایش داده می‌شود.';
+
+    successCard.scrollIntoView({
+      behavior:'smooth',
+      block:'center'
+    });
+
+  } catch(error) {
+    showStatus(
+      error.message || 'ثبت درخواست با خطا مواجه شد.',
+      'failure'
+    );
+  } finally {
+    isSubmitting = false;
+    submitButton.disabled = false;
+    submitButton.textContent = 'ثبت درخواست خرید';
+  }
+});
+
+populateProducts();
+renderHistory();
+</script>
+
+</body>
+</html>

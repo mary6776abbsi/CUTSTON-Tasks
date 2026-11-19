@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>محصولات CUTSTON | مهندسی عملکرد در صنعت سنگ</title>
+
+  <style>
+    :root {
+      --orange: #E87524;
+      --orange-dark: #C65D16;
+      --black: #17191C;
+      --black-soft: #22262B;
+      --gray: #85898E;
+      --gray-dark: #555B62;
+      --gray-light: #C6C9CC;
+      --white: #F5F5F3;
+      --border: rgba(255,255,255,0.10);
+      --muted: #A5A9AE;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: Dana, Tahoma, sans-serif;
+      line-height: 1.8;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      direction: ltr;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: var(--white);
+    }
+
+    .brand span {
+      color: var(--orange);
+    }
+
+    .brand-caption {
+      color: var(--gray);
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-top: -5px;
+    }
+
+    .header-tag {
+      border: 1px solid var(--gray-dark);
+      padding: 7px 15px;
+      border-radius: 3px;
+      color: var(--gray-light);
+      font-size: 12px;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 65px 0 45px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(232,117,36,0.13);
+      transform: rotate(45deg);
+      left: -120px;
+      top: 20px;
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: clamp(25px, 4vw, 39px);
+      margin: 0 0 12px;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+    }
+
+    .hero-description {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2.2;
+    }
+
+    .hero-line {
+      width: 65px;
+      height: 4px;
+      background: var(--orange);
+      margin-top: 25px;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 25px 0;
+    }
+
+    .stat {
+      background: var(--black-soft);
+      border: 1px solid var(--border);
+      padding: 17px 20px;
+      border-right: 3px solid var(--orange);
+    }
+
+    .stat-value {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* PRODUCTS */
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin: 35px 0 22px;
+    }
+
+    .section-heading h2 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .section-heading h2::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 21px;
+      background: var(--orange);
+      margin-left: 11px;
+      vertical-align: middle;
+    }
+
+    .section-note {
+      color: var(--gray);
+      font-size: 11px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+      padding-bottom: 50px;
+    }
+
+    .product-card {
+      background: var(--black-soft);
+      border: 1px solid var(--border);
+      position: relative;
+      padding: 24px;
+      transition: border-color .2s, transform .2s;
+      min-width: 0;
+    }
+
+    .product-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-3px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .category {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .product-number {
+      direction: ltr;
+      font-family: Arial, sans-serif;
+      color: var(--gray);
+      font-size: 11px;
+    }
+
+    .product-card h3 {
+      font-size: 19px;
+      margin: 0 0 8px;
+      line-height: 1.9;
+    }
+
+    .code {
+      direction: ltr;
+      text-align: right;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: var(--gray-light);
+      letter-spacing: 1px;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 2.1;
+      min-height: 50px;
+      margin: 17px 0;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 13px;
+    }
+
+    .size-item {
+      background: var(--black);
+      border: 1px solid var(--border);
+      padding: 15px;
+      margin-top: 10px;
+    }
+
+    .size-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+
+    .size-label {
+      direction: ltr;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--white);
+    }
+
+    .size-tag {
+      font-size: 10px;
+      color: var(--orange);
+      border: 1px solid rgba(232,117,36,.35);
+      padding: 2px 8px;
+    }
+
+    .dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .dimension {
+      background: var(--black-soft);
+      padding: 9px 5px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .dimension-label {
+      color: var(--gray);
+      font-size: 10px;
+    }
+
+    .dimension-value {
+      direction: ltr;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 3px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .price-label {
+      color: var(--gray);
+      font-size: 11px;
+    }
+
+    .price {
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .empty {
+      background: rgba(232,117,36,.07);
+      border: 1px dashed rgba(232,117,36,.5);
+      padding: 18px;
+      color: var(--gray-light);
+      font-size: 12px;
+      line-height: 2;
+      text-align: center;
+    }
+
+    .empty strong {
+      display: block;
+      color: var(--orange);
+      margin-bottom: 5px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 0;
+      text-align: center;
+    }
+
+    .footer-brand {
+      direction: ltr;
+      font-family: Arial, sans-serif;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .footer-brand span {
+      color: var(--orange);
+    }
+
+    .footer-text {
+      color: var(--gray);
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    .footer-tagline {
+      direction: ltr;
+      color: var(--orange);
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: #FF9C7A;
+      border: 1px solid #A94D35;
+      padding: 15px;
+      line-height: 2;
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 650px) {
+      .container {
+        width: calc(100% - 28px);
+      }
+
+      .topbar {
+        min-height: 72px;
+      }
+
+      .brand {
+        font-size: 25px;
+      }
+
+      .header-tag {
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+
+      .hero {
+        padding: 45px 0 35px;
+      }
+
+      .stats {
+        gap: 7px;
+      }
+
+      .stat {
+        padding: 12px 8px;
+      }
+
+      .stat-value {
+        font-size: 21px;
+      }
+
+      .stat-label {
+        font-size: 10px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container topbar">
+
+      <div>
+        <div class="brand">CUT<span>STON</span></div>
+        <div class="brand-caption">DIAMOND TOOLS & CUTTING SOLUTIONS</div>
+      </div>
+
+      <div class="header-tag">
+        کاتالوگ محصولات تخصصی
+      </div>
+
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+
+      <div class="eyebrow">
+        راهکارهای تخصصی برش سنگ
+      </div>
+
+      <h1>
+        مهندسی عملکرد
+        <span>در صنعت سنگ</span>
+      </h1>
+
+      <p class="hero-description">
+        آشنایی با محصولات CUTSTON، مشخصات فنی، ابعاد و اطلاعات
+        موردنیاز برای انتخاب ابزار مناسب در عملیات تخصصی برش سنگ.
+      </p>
+
+      <div class="hero-line"></div>
+
+    </section>
+
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-value" id="product-count">۰</div>
+        <div class="stat-label">تعداد محصولات</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-value" id="size-count">۰</div>
+        <div class="stat-label">تعداد سایزهای تعریف‌شده</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-value" id="inquiry-count">۰</div>
+        <div class="stat-label">موارد نیازمند استعلام قیمت</div>
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-heading">
+        <h2>محصولات و مشخصات فنی</h2>
+        <div class="section-note">
+          اطلاعات فنی ثبت‌شده در سیستم محصولات
+        </div>
+      </div>
+
+      <div id="products" class="product-grid">
+        در حال بارگذاری اطلاعات محصولات...
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+
+      <div class="footer-brand">
+        CUT<span>STON</span>
+      </div>
+
+      <div class="footer-text">
+        مهندسی عملکرد در صنعت سنگ
+      </div>
+
+      <div class="footer-tagline">
+        FOR THE BEST CUT
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module">
+
+    import { PRODUCTS } from '../src/product-data.js';
+
+    const container = document.getElementById('products');
+
+    const numberFormat = new Intl.NumberFormat('fa-IR');
+
+    const dimensionLabels = {
+      length: 'طول',
+      width: 'عرض',
+      height: 'ارتفاع'
+    };
+
+    function createElement(tag, className, text) {
+      const element = document.createElement(tag);
+
+      if (className) {
+        element.className = className;
+      }
+
+      if (text !== undefined) {
+        element.textContent = text;
+      }
+
+      return element;
+    }
+
+    function renderSize(size) {
+
+      const sizeItem = createElement('div', 'size-item');
+
+      const sizeHeader = createElement('div', 'size-header');
+
+      sizeHeader.appendChild(
+        createElement('div', 'size-label', size.label)
+      );
+
+      sizeHeader.appendChild(
+        createElement('span', 'size-tag', 'مشخصات ابعادی')
+      );
+
+      sizeItem.appendChild(sizeHeader);
+
+      if (size.dimensions) {
+
+        const dimensions = createElement('div', 'dimensions');
+
+        Object.entries(size.dimensions).forEach(([key, value]) => {
+
+          const dimension = createElement('div', 'dimension');
+
+          dimension.appendChild(
+            createElement(
+              'div',
+              'dimension-label',
+              dimensionLabels[key] || key
+            )
+          );
+
+          dimension.appendChild(
+            createElement(
+              'div',
+              'dimension-value',
+              numberFormat.format(value)
+            )
+          );
+
+          dimensions.appendChild(dimension);
+
+        });
+
+        sizeItem.appendChild(dimensions);
+
+      } else {
+
+        sizeItem.appendChild(
+          createElement('div', 'empty', 'ابعاد این سایز ثبت نشده است.')
+        );
+
+      }
+
+      const priceRow = createElement('div', 'price-row');
+
+      priceRow.appendChild(
+        createElement('span', 'price-label', 'قیمت محصول')
+      );
+
+      const priceText = size.price === null
+        ? 'جهت استعلام تماس بگیرید'
+        : `${numberFormat.format(size.price)} ریال`;
+
+      priceRow.appendChild(
+        createElement('span', 'price', priceText)
+      );
+
+      sizeItem.appendChild(priceRow);
+
+      return sizeItem;
+    }
+
+    function renderProduct(product, index) {
+
+      const card = createElement('article', 'product-card');
+
+      const cardTop = createElement('div', 'card-top');
+
+      cardTop.appendChild(
+        createElement(
+          'div',
+          'category',
+          product.category || 'بدون دسته‌بندی'
+        )
+      );
+
+      cardTop.appendChild(
+        createElement(
+          'div',
+          'product-number',
+          `PRODUCT ${String(index + 1).padStart(2, '0')}`
+        )
+      );
+
+      card.appendChild(cardTop);
+
+      card.appendChild(
+        createElement('h3', '', product.name)
+      );
+
+      card.appendChild(
+        createElement('div', 'code', product.code)
+      );
+
+      card.appendChild(
+        createElement(
+          'p',
+          'description',
+          product.description || 'توضیحات محصول ثبت نشده است.'
+        )
+      );
+
+      card.appendChild(
+        createElement('div', 'card-divider')
+      );
+
+      card.appendChild(
+        createElement('div', 'section-title', 'ابعاد و سایزهای محصول')
+      );
+
+      if (!product.sizes || product.sizes.length === 0) {
+
+        const empty = createElement('div', 'empty');
+
+        empty.appendChild(
+          createElement('strong', '', 'سایزی تعریف نشده است')
+        );
+
+        empty.appendChild(
+          createElement(
+            'span',
+            '',
+            'در حال حاضر اطلاعات ابعادی برای این محصول ثبت نشده است.'
+          )
+        );
+
+        card.appendChild(empty);
+
+      } else {
+
+        product.sizes.forEach(size => {
+          card.appendChild(renderSize(size));
+        });
+
+      }
+
+      return card;
+    }
+
+    function renderProducts() {
+
+      if (!Array.isArray(PRODUCTS)) {
+        throw new Error('ساختار اطلاعات محصولات معتبر نیست.');
+      }
+
+      container.innerHTML = '';
+
+      let totalSizes = 0;
+      let inquiryCount = 0;
+
+      PRODUCTS.forEach(product => {
+
+        const sizes = Array.isArray(product.sizes)
+          ? product.sizes
+          : [];
+
+        totalSizes += sizes.length;
+
+        inquiryCount += sizes.filter(
+          size => size.price === null
+        ).length;
+
+        container.appendChild(
+          renderProduct(product, PRODUCTS.indexOf(product))
+        );
+
+      });
+
+      document.getElementById('product-count').textContent =
+        numberFormat.format(PRODUCTS.length);
+
+      document.getElementById('size-count').textContent =
+        numberFormat.format(totalSizes);
+
+      document.getElementById('inquiry-count').textContent =
+        numberFormat.format(inquiryCount);
+
+    }
+
+    try {
+
+      renderProducts();
+
+    } catch (error) {
+
+      console.error(error);
+
+      container.innerHTML = '';
+
+      container.appendChild(
+        createElement(
+          'div',
+          'error',
+          'بارگذاری اطلاعات محصولات با مشکل مواجه شد. ساختار فایل اطلاعات محصولات را بررسی کنید.'
+        )
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
