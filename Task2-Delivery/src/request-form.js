@@ -82,17 +82,34 @@ export function validateRequest(data) {
     errors.quantity = 'تعداد باید عدد صحیح بزرگ‌تر از صفر باشد.';
   }
 
+  // پیدا کردن محصول انتخاب‌شده بر اساس شناسه
   const product = PRODUCTS.find(item => item.id === data.productId);
 
+  // اگر محصول و سایز انتخاب شده باشند، اعتبارسنجی سایز انجام می‌شود
   if (product && data.sizeId) {
-    const sizeExists = product.sizes.some(
+
+    // پیدا کردن سایز انتخاب‌شده در فهرست سایزهای محصول
+    const selectedSize = product.sizes.find(
       size => size.id === data.sizeId
     );
 
-    if (!sizeExists) {
+    // اگر سایز انتخاب‌شده در اطلاعات محصول وجود نداشته باشد
+    if (!selectedSize) {
       errors.sizeId = 'سایز انتخاب‌شده معتبر نیست.';
+
+    // بررسی اینکه قیمت سایز خالی یا نامعتبر نباشد
+    } else if (
+      selectedSize.price === null ||                  // قیمت null نباشد
+      selectedSize.price === undefined ||             // قیمت تعریف‌نشده نباشد
+      selectedSize.price === '' ||                    // قیمت رشته خالی نباشد
+      !Number.isFinite(Number(selectedSize.price)) || // قیمت عدد معتبر باشد
+      Number(selectedSize.price) <= 0                  // قیمت بزرگ‌تر از صفر باشد
+    ) {
+      // اگر قیمت مشخص نباشد، خطا ثبت می‌شود و درخواست نباید ثبت شود
+      errors.sizeId = 'قیمت این سایز مشخص نیست و امکان ثبت درخواست وجود ندارد.';
     }
   }
 
+  // برگرداندن تمام خطاهای شناسایی‌شده به فرم
   return errors;
 }
